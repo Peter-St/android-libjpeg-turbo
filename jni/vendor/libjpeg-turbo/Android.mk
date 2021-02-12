@@ -1,7 +1,7 @@
 LOCAL_PATH := $(abspath $(call my-dir))
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := libjpeg-turbo
+
 
 SOURCE_PATH := libjpeg-turbo-2.0.1
 
@@ -172,6 +172,12 @@ LOCAL_SRC_FILES += \
 	$(SOURCE_PATH)/jutils.c \
 	$(SOURCE_PATH)/jmemmgr.c \
 	$(SOURCE_PATH)/jmemnobs.c \
+    $(SOURCE_PATH)/cdjpeg.h \
+	$(SOURCE_PATH)/rdbmp.c \
+	$(SOURCE_PATH)/wrbmp.c \
+	$(SOURCE_PATH)/rdppm.c \
+	$(SOURCE_PATH)/wrppm.c \
+
 
 # if WITH_ARITH_ENC from Makefile.am
 LOCAL_SRC_FILES += \
@@ -230,5 +236,11 @@ LOCAL_CFLAGS += \
 	-DNEED_SYS_TYPES_H=1 \
 	-DSTDC_HEADERS=1 \
 	-DWITH_SIMD=1 \
+    -DPPM_SUPPORTED=1 \
+    -DBMP_SUPPORTED=1 \
 
-include $(BUILD_STATIC_LIBRARY)
+LOCAL_MODULE := jpeg-turbo
+
+include $(BUILD_SHARED_LIBRARY)
+
+LOCAL_ARM_MODE := arm
